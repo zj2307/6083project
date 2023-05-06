@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="background/04.jpg") }}');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .form-container {
+            text-align: center;
+        }
+        .form-wrapper {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+        label {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"], input[type="cell_number"], input[type="email_address"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-wrapper">
+            <h1>Register</h1>
+            <form action="{{ url_for('register') }}" method="post">
+                <label for="username">username：</label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">password：</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <label for="cell_number">phone number：</label>
+                <input type="cell_number" id="cell_number" name="cell_number" required>
+                <br>
+                <label for="email_address">email address：</label>
+                <input type="email_address" id="email_address" name="email_address" required>
+                <br>
+                <input type="submit" value="Register">
+            </form>
+            <p>Already have a account?<a href="{{ url_for('index') }}">Sign in</a></p>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+        </div>
+
+

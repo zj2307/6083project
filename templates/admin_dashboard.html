@@ -1,0 +1,101 @@
+{% extends "admin_base.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+            text-align: left;
+        }
+        .styled-table thead th {
+            font-weight: bold;
+        }
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #009879;
+        }
+        .chart-container {
+            display: inline-block;
+            width: 55%;
+            vertical-align: top;
+        }
+        .chart-canvas {
+            max-width: 100%;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const chartData = {{ chart_data | tojson }};
+
+        window.onload = function() {
+            // Create bar chart
+            const barChartCtx = document.getElementById('bar-chart').getContext('2d');
+            const barChart = new Chart(barChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Payments'],
+                    datasets: [{
+                        label: 'Payments',
+                        data: [chartData.payment_total],
+                        backgroundColor: '#3e95cd',
+                        borderColor: '#3e95cd',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Create pie chart
+            const pieChartCtx = document.getElementById('pie-chart').getContext('2d');
+            const pieChart = new Chart(pieChartCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Attractions', 'Shows'],
+                    datasets: [{
+                        data: [chartData.visitor_counts.attractions, chartData.visitor_counts.shows],
+                        backgroundColor: ['#3e95cd', '#8e5ea2'],
+                        borderColor: ['#3e95cd', '#8e5ea2'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                },
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="chart-container">
+                <canvas id="bar-chart" class="chart-canvas"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="pie-chart" class="chart-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

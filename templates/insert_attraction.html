@@ -1,0 +1,69 @@
+<!-- insert_attraction.html -->
+{% extends "admin_base.html" %}
+
+{% block content %}
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+    }
+    .form-container {
+        text-align: center;
+    }
+    .form-wrapper {
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 400px;
+    }
+    label {
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+    input[type="text"], input[type="password"], input[type="cell_number"], input[type="email_address"], input[type="number"], .form-control, textarea, select {
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+    }
+    input[type="submit"] {
+        background-color: #007BFF;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        font-size: 1rem;
+        border-radius: 5px;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+<div class="form-container">
+    <div class="form-wrapper">
+        <h1>Insert Attraction</h1>
+        <form method="POST" action="{{ url_for('insert_attraction') }}">
+            {{ form.hidden_tag() }}
+            <p>{{ form.attraction_name.label }}<br>{{ form.attraction_name }}</p>
+            <p>{{ form.description.label }}<br>{{ form.description }}</p>
+            <p>{{ form.type.label }}<br>{{ form.type }}</p>
+            <p>{{ form.status.label }}<br>{{ form.status }}</p>
+            <p>{{ form.capacity.label }}<br>{{ form.capacity }}</p>
+            <p>{{ form.minimum_height.label }}<br>{{ form.minimum_height }}</p>
+            <p>{{ form.duration_in_minutes.label }}<br>{{ form.duration_in_minutes }}</p>
+            <p>{{ form.location_section.label }}<br>{{ form.location_section }}</p>
+            <p>{{ form.submit }}</p>
+        </form>
+    </div>
+</div>
+{% endblock %}
+

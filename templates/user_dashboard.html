@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="content">
+        <h1>Welcome to Voyage Of Amusements!</h1>
+        <p><strong>VOA (Voyage Of Amusements) is a theme park with several attractions, shows, food stalls, restaurants, and retail stores.</strong></p>
+        <p><strong>You can check your visit records and personal information here</strong></p>
+        <p><strong>We do have:</strong></p>
+        <h3>Attractions</h3>
+        <ul>
+            {% for attraction in attractions %}
+                <li>{{ attraction.attraction_name }} ({{ attraction.type }})</li>
+            {% endfor %}
+        </ul>
+        <h3>Shows</h3>
+        <ul>
+            {% for show in shows %}
+                <li>{{ show.name }} ({{ show.type }})</li>
+            {% endfor %}
+        </ul>
+        <li><strong><a href="{{ url_for('purchase_ticket') }}" class="purchase-ticket-link"><strong>Purchase ticket now</strong></a></strong></li>
+    </div>
+{% endblock %}
+
+
+
+
+
+
